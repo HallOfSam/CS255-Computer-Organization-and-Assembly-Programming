@@ -1,6 +1,12 @@
 package edu.emory.cs.project3;
 import java.util.Arrays;
 
+/* ==========================================================
+      CS 255 pj3
+      Saier (Sam) Hu
+   ========================================================== */
+
+
 public class DuoDec
 {
    public static char[] digit 
@@ -39,6 +45,22 @@ public class DuoDec
       }
 
       // Write the parseDuoDec() code here
+      int[] digit = new int[20]; // Used to store individual digits in String s
+      int  value, sign;
+      int  i, pos;
+      int  len;
+
+      /* -------------------------
+         Check for negative sign
+         ------------------------- */
+      if (s.charAt(0) == '-')
+      {  sign = -1;
+         pos = 1;     // Start processing at charAt(1)
+      }
+      else
+      {  sign = 0;
+         pos  = 0;    // Start processing at charAt(0)
+      }
 
 
 
@@ -46,6 +68,37 @@ public class DuoDec
       //TODO:
     return 1;
    }
+   /* ---------------------------------------------------------
+            A helper method that returns the 2's complement representation
+            given ASCII code representation
+            --------------------------------------------------------- */
+   public static int to2sComplement(char digit) {
+
+      int output = switch (digit) {
+
+         case '@' ->  0;
+         case '!' ->  1;
+         case '?' ->  2;
+         case '&' ->  3;
+         case '%' ->  4;
+         case '$' ->  5;
+         case '=' ->  6;
+         case '^' ->  7;
+         case '(' ->  8;
+         case ')' ->  9;
+         case '[' -> 10;
+         case ']' -> 11;
+
+         default -> 0;
+      };
+
+      return output;
+
+   }
+
+
+
+
 
    /* ==========================================================
       Return the String of DuoDec digit that represent the value
@@ -109,7 +162,7 @@ public class DuoDec
 
     /* ---------------------------------------------------------
           A helper method that returns the ASCII code representation
-          of an integer from 0-11
+          given a 2's representation of an integer
           --------------------------------------------------------- */
    public static char toASCII(int remainder) {
 
