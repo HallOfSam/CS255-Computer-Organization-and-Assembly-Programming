@@ -2,8 +2,8 @@ package edu.emory.cs.project3;
 import java.util.Arrays;
 
 /* ==========================================================
-      CS 255 pj3
-      Saier (Sam) Hu
+      THIS CODE IS MY OWN WORK, IT WAS WRITTEN WITHOUT CONSULTING A TUTOR
+      OR CODE WRITTEN BY OTHER STUDENTS - Saier (Sam) Hu
    ========================================================== */
 
 
