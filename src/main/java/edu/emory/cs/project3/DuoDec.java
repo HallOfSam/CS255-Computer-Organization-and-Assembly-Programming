@@ -9,8 +9,8 @@ import java.util.Arrays;
 
 public class DuoDec
 {
-   public static char[] digit 
-            = {'@', '!', '?', '&', '%', '$', '=', '^', '(', ')', '[', ']'};
+   public static char[] digit
+           = {'@', '!', '?', '&', '%', '$', '=', '^', '(', ')', '[', ']'};
 
    /* ==========================================================
       Return the 2's complement binary representation for the
@@ -37,9 +37,9 @@ public class DuoDec
          if ( j >= digit.length )
          {
             System.out.println("Illegal nano digit found in input: "
-                                        + s.charAt(i) );
+                    + s.charAt(i) );
             System.out.println("A DuoDec digit must be one of these: "
-                                + Arrays.toString (digit) );
+                    + Arrays.toString (digit) );
             System.exit(1);
          }
       }
@@ -62,11 +62,37 @@ public class DuoDec
          pos  = 0;    // Start processing at charAt(0)
       }
 
+      /* -------------------------------------------
+         Convert each character digit into 2s compl
+         (and keep a count on the number of digits
+         ------------------------------------------- */
+      len = 0;        // len counts # digits (without the leading '-')
 
+      for ( i = pos; i < s.length(); i++ ) // Convert ASCII digits
+      {
+         digit[len] = to2sComplement(s.charAt(i));
+         len++;       // Count # digits in number
+      }
 
+      /* ------------------------------------------
+         Compute the absolute value of the number
+         ------------------------------------------ */
+      value = 0;
+      for (int k = 0; k < len; k++)
+      {
+         pos = (len - 1) - k;
 
-      //TODO:
-    return 1;
+         value = value + digit[k]* (int)(Math.pow(12, pos));
+      }
+
+      /* ========================================================
+         Negate 2's complement representation if first character
+	     of input was '-'
+	 ========================================================= */
+      if (sign == -1)
+         value = -value;  // Compute the negative value (= flip bits and add 1 !!)
+
+      return(value);      // Return a BINARY 2's compl code
    }
    /* ---------------------------------------------------------
             A helper method that returns the 2's complement representation
@@ -102,7 +128,7 @@ public class DuoDec
 
    /* ==========================================================
       Return the String of DuoDec digit that represent the value
-      of the 2's complement binary number given in 
+      of the 2's complement binary number given in
       the input parameter 'value'
       ========================================================== */
    public static String toString(int value)
@@ -160,10 +186,10 @@ public class DuoDec
       return result;
    }
 
-    /* ---------------------------------------------------------
-          A helper method that returns the ASCII code representation
-          given a 2's representation of an integer
-          --------------------------------------------------------- */
+   /* ---------------------------------------------------------
+         A helper method that returns the ASCII code representation
+         given a 2's representation of an integer
+         --------------------------------------------------------- */
    public static char toASCII(int remainder) {
 
       char output = switch (remainder) {
@@ -191,14 +217,11 @@ public class DuoDec
    public static void main (String[] args)
    {
 
-       System.out.println(DuoDec.toString(0));
+      System.out.println(DuoDec.toString(0));
 
+      System.out.println(DuoDec.parseDuoDec("!@"));
 
    }
 
 
 }
-
-
-
-
